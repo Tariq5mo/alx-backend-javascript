@@ -8,6 +8,7 @@ const promise3 = new Promise((resolve) =>
 
 let re = Promise.all([promise1, promise2, promise3]);
 
+promise1.
 // Output on the console
 
 // *Promise {<fulfilled>: Array(3)}*
