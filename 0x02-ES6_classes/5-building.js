@@ -5,7 +5,7 @@ export default class Building {
     }
     this._sqft = sqft;
     if (
-      new.target !== 'Building'
+      new.target !== Building
       && new.target.prototype.evacuationWarningMessage === undefined
     ) {
       throw new Error(
