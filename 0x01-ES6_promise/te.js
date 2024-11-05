@@ -1,27 +1,15 @@
-const promise1 = Promise.resolve(`First Promise's Value`);
-const promise2 = new Promise((resolve) =>
-  setTimeout(resolve, 3000, `Second Promise's Value`)
-);
-const promise3 = new Promise((resolve) =>
-  setTimeout(resolve, 2000, `Third Promise's Value`)
-);
+import signUpUser from './4-user-promise';
+import uploadPhoto from './5-photo-reject';
 
-let re = Promise.all([promise1, promise2, promise3]);
-
-promise1.
-// Output on the console
-
-// *Promise {<fulfilled>: Array(3)}*
-
-Promise.all([promise1, promise2, promise3]).then((values) => {
-  values.forEach((value) => console.log(value));
-});
-
-setTimeout(() => {
-  console.log(re);
-}, 3000);
-// Output on the console
-
-// First Promise's Value
-// Second Promise's Value
-// Third Promise's Value
+export default function handleProfileSignup(firstName, lastName, fileName) {
+  return Promise.allSettled([signUpUser(firstName, lastName), uploadPhoto(fileName)])
+    .then((results) => {
+      const response = results.map((result) => {
+        if (result.status === 'fulfilled') {
+          return { status: result.status, value: result.value };
+        }
+        return { status: result.status, reason: result.reason };
+      });
+      return response;
+    });
+}
