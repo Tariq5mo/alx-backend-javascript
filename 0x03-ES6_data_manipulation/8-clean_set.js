@@ -6,7 +6,7 @@ export default function cleanSet(set, startString) {
         cst.push(element.replace(startString, ''));
       }
     }
-    return cst.join('-');
+    return String(cst.join('-'));
   }
   return '';
 }
