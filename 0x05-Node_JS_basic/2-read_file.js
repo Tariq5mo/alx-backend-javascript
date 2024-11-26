@@ -39,7 +39,6 @@ function countStudents(path) {
     console.log(output.join('\n'));
   } catch (err) {
     console.error('Cannot load the database');
-    console.error(err);
   }
 }
 
