@@ -9,20 +9,20 @@ function countStudents(path) {
 
     const studentsObject = students.map(([firstName, lastName, age, field]) => {
       const studentObject = {};
-      studentObject.firstName = firstName; // Changed from firstNames to firstName
+      studentObject.firstName = firstName;
       studentObject.lastName = lastName;
       studentObject.age = age;
       studentObject.field = field;
       return studentObject;
     });
-
+    /* remove the headers */
     studentsObject.shift();
     const fieldMap = {};
     studentsObject.forEach((student) => {
       if (!fieldMap[student.field]) {
         fieldMap[student.field] = [];
       }
-      fieldMap[student.field].push(student.firstName); // Changed from firstNames to firstName
+      fieldMap[student.field].push(student.firstName);
     });
     const output = [];
     output.push(`Number of students: ${studentsObject.length}`);
