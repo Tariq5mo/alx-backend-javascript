@@ -1,4 +1,4 @@
-const http = require('http');
+const express = require('express');
 const { readFile } = require('fs');
 
 async function countStudents(path) {
@@ -42,33 +42,31 @@ async function countStudents(path) {
   });
 }
 
-// Define the request handler function
-const requestHandler = (req, res) => {
-  if (req.url === '/') {
-    res.writeHead(200, { 'Content-Type': 'text/plain' });
-    res.end('Hello Holberton School!');
-  } else if (req.url === '/students') {
-    res.writeHead(200, { 'Content-Type': 'text/plain' });
-    countStudents(process.argv[2])
-      .then((data) => {
-        res.end(`This is the list of our students\n${data}`);
-      })
-      .catch((err) => {
-        res.writeHead(404, { 'Content-Type': 'text/plain' });
-        res.end(err.message);
-      });
-  } else {
-    res.writeHead(404, { 'Content-Type': 'text/plain' });
-    res.end('Not Found');
-  }
-};
-
-// Create the server
-const app = http.createServer(requestHandler);
-
-// Make the server listen on port 1245
-const port = 1245;
+const app = express();
 const host = '127.0.0.1';
+const port = 1245;
+
+app.get('/', (req, res) => {
+  res.setHeader('Content-Type', 'text/plain');
+  res.statusCode = 200;
+  res.send('Hello Holberton School!');
+  res.end();
+});
+
+app.get('/students', async (req, res) => {
+  try {
+    const data = await countStudents(process.argv[2]);
+    res.writeHead(200, { 'Content-Type': 'text/plain' });
+    res.end(`This is the list of our students\n${data}`);
+  } catch (error) {
+    // Ensure headers are not sent after the response has ended
+    if (!res.headersSent) {
+      res.writeHead(500, { 'Content-Type': 'text/plain' });
+      res.end(error.message);
+    }
+  }
+});
+
 app.listen(port, host);
 
 module.exports = app;
