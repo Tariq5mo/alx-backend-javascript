@@ -4,7 +4,7 @@
  */
 function displayMessage(argument) {
   if (argument === null || argument === undefined) {
-    process.stdout.write('\n');
+    process.stdout.write('');
   } else {
     process.stdout.write(`${String(argument)}\n`);
   }
