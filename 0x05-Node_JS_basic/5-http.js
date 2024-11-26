@@ -52,9 +52,12 @@ const requestHandler = (req, res) => {
       .then((data) => {
         res.end(`This is the list of our students\n${data}`);
       })
-      .catch((err) => {
-        res.end(err.message);
+      .catch(() => {
+        res.end('Cannot load the database');
       });
+  } else {
+    res.writeHead(200, { 'Content-Type': 'text/plain' });
+    res.end('Hello Holberton School!');
   }
 };
 
