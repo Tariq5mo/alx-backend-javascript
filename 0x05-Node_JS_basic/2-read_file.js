@@ -3,14 +3,7 @@ const fs = require('fs');
 function countStudents(path) {
   try {
     const data = fs.readFileSync(path, 'utf8');
-    const records = data.split('\n');
-
-    // Remove the last elements of the array if they are empty
-    for (let i = records.length - 1; i > 0; i -= 1) {
-      if (records[i] === '') {
-        records.pop();
-      }
-    }
+    const records = data.split('\n').filter((record) => record.trim() !== '');
 
     const students = records.map((record) => record.split(','));
 
@@ -38,7 +31,7 @@ function countStudents(path) {
     }
     console.log(output.join('\n'));
   } catch (err) {
-    console.error('Cannot load the database');
+    throw new Error('Cannot load the database');
   }
 }
 
