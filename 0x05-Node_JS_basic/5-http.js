@@ -41,6 +41,7 @@ async function countStudents(path) {
     });
   });
 }
+
 // Define the request handler function
 const requestHandler = (req, res) => {
   if (req.url === '/') {
@@ -56,8 +57,8 @@ const requestHandler = (req, res) => {
         res.end('Cannot load the database');
       });
   } else {
-    res.writeHead(200, { 'Content-Type': 'text/plain' });
-    res.end('Hello Holberton School!');
+    res.writeHead(404, { 'Content-Type': 'text/plain' });
+    res.end('Not Found');
   }
 };
 
