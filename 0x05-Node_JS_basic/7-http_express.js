@@ -54,6 +54,11 @@ app.get('/', (req, res) => {
 });
 
 app.get('/students', async (req, res) => {
+  const databasePath = process.argv[2];
+  if (!databasePath) {
+    res.status(400).send('Database path not provided');
+    return;
+  }
   try {
     const data = await countStudents(process.argv[2]);
     res.writeHead(200, { 'Content-Type': 'text/plain' });
