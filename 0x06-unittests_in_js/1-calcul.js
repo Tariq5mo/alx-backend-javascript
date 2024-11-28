@@ -1,13 +1,15 @@
 function calculateNumber(type, a, b) {
   if (type === 'SUM') {
-    return Number(a.toFixed()) + Number(b.toFixed())
-  } else if (type === 'SUBTRACT') {
-    return Number(a.toFixed()) - Number(b.toFixed())
-  } else if (type === 'DIVIDE') {
+    return Number(a.toFixed()) + Number(b.toFixed());
+  }
+  if (type === 'SUBTRACT') {
+    return Number(a.toFixed()) - Number(b.toFixed());
+  }
+  if (type === 'DIVIDE') {
     if (b === 0) {
-      return 'Error'
+      return 'Error';
     }
-    return Number(a.toFixed()) / Number(b.toFixed())
+    return Number(a.toFixed()) / Number(b.toFixed());
   }
 }
 
