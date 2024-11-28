@@ -6,7 +6,7 @@ function calculateNumber(type, a, b) {
     return Number(a.toFixed()) - Number(b.toFixed());
   }
   if (type === 'DIVIDE') {
-    if (b === 0) {
+    if (Number(b.toFixed()) === 0) {
       return 'Error';
     }
     return Number(a.toFixed()) / Number(b.toFixed());

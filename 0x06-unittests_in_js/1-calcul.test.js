@@ -168,6 +168,14 @@ describe('test calculateNumber function', () => {
       assert.strictEqual(calculateNumber('DIVIDE', 0, 1), 0, 'Values are not strictly equal');
     });
 
+    it('test normal case with a = 0, b is 0 and less than 0.2', () => {
+      assert.strictEqual(calculateNumber('DIVIDE', 1, 0.2), 'Error', 'Values are not strictly equal');
+    });
+
+    it('test normal case with a = 0, b is 0 and greater than 0.2', () => {
+      assert.strictEqual(calculateNumber('DIVIDE', 1, 0.7), 1, 'Values are not strictly equal');
+    });
+
     it('test case (a) float less than a.5', () => {
       assert.strictEqual(calculateNumber('DIVIDE', 25.2, 5), 5, 'Values are not strictly equal');
     });
