@@ -1,7 +1,6 @@
-const { describe, it, before, after } = require('mocha');
+const { describe, it} = require('mocha');
 const { expect } = require('chai');
 const request = require('request');
-const app = require('./api')
 
 describe('test server', () => {
   it('should return 200', (done) => {
