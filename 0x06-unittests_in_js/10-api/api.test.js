@@ -1,7 +1,6 @@
 const { describe, it} = require('mocha');
 const { expect } = require('chai');
 const request = require('request');
-const express = require('express');
 
 describe('test server', () => {
   it('should return 200', (done) => {
@@ -55,18 +54,6 @@ describe('test server', () => {
     })
   });
 
-/*   it('should return an object', (done) => {
-    request.get('http://localhost:7865/available_payments', (err, res, body) => {
-      const bodyObj = body
-      expect(JSON.parse(bodyObj)).to.deep.equal({
-        payment_methods: {
-          credit_cards: true,
-          paypal: false
-        }
-      });
-      done();
-    })
-  }); */
 
   it('should return an object', (done) => {
     request.get('http://localhost:7865/available_payments', (err, res, body) => {
