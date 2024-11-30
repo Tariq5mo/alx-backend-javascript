@@ -4,9 +4,6 @@ const request = require('request');
 const express = require('express');
 
 describe('test server', () => {
-  const app = require('./api')
-
-  app.use(express.json()); // Middleware to parse JSON bodies
   it('should return 200', (done) => {
     request.get('http://localhost:7865', (err, res) => {
       expect(res.statusCode).to.equal(200);
@@ -29,21 +26,21 @@ describe('test server', () => {
   });
   // ---------------------------------------
 
-  it('should return 200', (done) => {
+  it('should return 200. 2', (done) => {
     request.get('http://localhost:7865/cart/12', (err, res) => {
       expect(res.statusCode).to.equal(200);
       done();
     })
   });
 
-  it('should return Welcome to the payment system', (done) => {
+  it('should Payment methods for cart 12', (done) => {
     request.get('http://localhost:7865/cart/12', (err, res, body) => {
       expect(body).to.equal('Payment methods for cart 12');
       done();
     })
   });
 
-  it('should return 404', (done) => {
+  it('should return 404. 2', (done) => {
     request.get(' http://localhost:7865/cart/hello', (err, res) => {
       expect(res.statusCode).to.equal(404);
       done();
@@ -51,14 +48,14 @@ describe('test server', () => {
   });
   // ---------------------------------------
 
-  it('should return 200', (done) => {
+  it('should return 200. 3', (done) => {
     request.get('http://localhost:7865/available_payments', (err, res) => {
       expect(res.statusCode).to.equal(200);
       done();
     })
   });
 
-  it('should return Welcome to the payment system', (done) => {
+/*   it('should return an object', (done) => {
     request.get('http://localhost:7865/available_payments', (err, res, body) => {
       const bodyObj = body
       expect(JSON.parse(bodyObj)).to.deep.equal({
@@ -69,30 +66,37 @@ describe('test server', () => {
       });
       done();
     })
+  }); */
+
+  it('should return an object', (done) => {
+    request.get('http://localhost:7865/available_payments', (err, res, body) => {
+      expect(body).to.deep.equal('{"payment_methods":{"credit_cards":true,"paypal":false}}');
+      done();
+    })
   });
 
-  it('should return 404', (done) => {
+  it('should return 404. 3', (done) => {
     request.get('http://localhost:7865/available_payments/hello', (err, res) => {
       expect(res.statusCode).to.equal(404);
       done();
     })
   });
   // ---------------------------------------
-  it('should return 200', (done) => {
+  it('should return 200. 4', (done) => {
     request.post('http://localhost:7865/login', {form:{userName:'Betty'}}, (err, res) => {
       expect(res.statusCode).to.equal(200);
       done();
     })
   });
 
-  it('should return Welcome to the payment system', (done) => {
+  it('should return  Welcome Betty', (done) => {
     request.post('http://localhost:7865/login', {form:{userName:'Betty'}}, (err, res) => {
       expect(res.body).to.equal('Welcome Betty');
       done();
     })
   });
 
-  it('should return 404', (done) => {
+  it('should return 404. 4', (done) => {
     request.post('http://localhost:7865/login/Betty', {form:{userName:'Betty'}}, (err, res) => {
       expect(res.statusCode).to.equal(404);
       done();
