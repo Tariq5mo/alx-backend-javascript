@@ -2,11 +2,11 @@ const { describe, it} = require('mocha');
 const { expect } = require('chai');
 const request = require('request');
 const express = require('express');
-const app = require('./api')
-
-app.use(express.json()); // Middleware to parse JSON bodies
 
 describe('test server', () => {
+  const app = require('./api')
+
+  app.use(express.json()); // Middleware to parse JSON bodies
   it('should return 200', (done) => {
     request.get('http://localhost:7865', (err, res) => {
       expect(res.statusCode).to.equal(200);
